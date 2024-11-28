@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border-radius: 50%;
+  background:
+    linear-gradient(0deg ,rgb(0 0 0/50%) 30%,#0000 0 70%,rgb(0 0 0/100%) 0) 50%/8% 100%,
+    linear-gradient(90deg,rgb(0 0 0/25%) 30%,#0000 0 70%,rgb(0 0 0/75% ) 0) 50%/100% 8%;
+  background-repeat: no-repeat;
+  animation: l23 1s infinite steps(12);
+}
+.loader::before,
+.loader::after {
+   content: "";
+   grid-area: 1/1;
+   border-radius: 50%;
+   background: inherit;
+   opacity: 0.915;
+   transform: rotate(30deg);
+}
+.loader::after {
+   opacity: 0.83;
+   transform: rotate(60deg);
+}
+@keyframes l23 {
+  100% {transform: rotate(1turn)}
+}
+
+/* animasi elemen */
+/* Definisikan animasi dengan @keyframes */
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(0); /* Posisi awal */
+  }
+  50% {
+    transform: translateY(-10px); /* Gerak ke atas */
+  }
+  100% {
+    transform: translateY(0); /* Kembali ke posisi awal */
+  }
+}
+
+
+/* Terapkan animasi ke elemen */
+.ngambang1 {
+  animation: moveUpDown 6s infinite; /* 2 detik, infinite untuk terus menerus */
+}
+.ngambang2 {
+  animation: moveUpDown 7s infinite; /* 2 detik, infinite untuk terus menerus */
+}
+.ngambang3 {
+  animation: moveUpDown 5s infinite; /* 2 detik, infinite untuk terus menerus */
+}
+.ngambang4 {
+  animation: moveUpDown 8s infinite; /* 2 detik, infinite untuk terus menerus */
+}
+
+/* Membuat animasi rotasi */
+@keyframes putar {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+/* Styling untuk elemen yang akan berputar */
+.putar {
+  animation: putar 7s linear infinite;
+}
+.putar1 {
+  animation: putar 9s linear infinite;
+}
