@@ -51,9 +51,13 @@ const Navbar:React.FC = () => {
                 <Link to={'/'}><li className='py-3 px-5 hover:bg-slate-200 rounded flex items-center gap-x-2'><Home /> Home</li></Link>
                 <Link to={'/about'}><li className='py-3 px-5 hover:bg-slate-200 rounded flex items-center gap-x-2'><Info /> About</li></Link>
                 <Link to={'/detection'}><li className='py-3 px-5 hover:bg-slate-200 rounded flex items-center gap-x-2'><Eye /> Detection</li></Link>
-                <Link className='mx-auto' to={'/login'}>
-                  <Button className='w-full mt-5' type='button'>Login</Button>
-                </Link>
+                {user !== null?
+                  <Button onClick={handleLogout} className={'w-full mt-5 bg-red-500'} type='button'>Logout</Button>
+                :
+                  <Link className='mx-auto' to={'/login'}>
+                    <Button className='w-full mt-5' type='button'>Login</Button>
+                  </Link>
+                }
               </ul>
             </div>
           }

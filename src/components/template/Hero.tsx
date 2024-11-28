@@ -38,7 +38,7 @@ const Hero:React.FC = () => {
     <div className=' bg-secondary'>
       <div className='max-w-[1080px] mx-auto grid md:grid-cols-2 pt-52 pb-28 px-5 items-center'>
         <div className='relative'>
-          <div data-aos="fade-right" className='text-4xl font-medium'><p className='mb-2'>AI-Powered</p> <p>Eye Care <span className='border relative border-blue-900 px-3 pb-1 text-blue-900'>
+          <div data-aos="fade-right" className='text-4xl font-medium'><p className='mb-2'>AI-Powered</p> <p>Eye Care <span className='inline-block mt-3 md:mt-0 border relative border-blue-900 px-3 pb-1 text-blue-900'>
             Inovations 
             <div className="absolute w-[8px] h-[8px] border border-blue-900 left-[-4px] bottom-[-4px]"></div>
             <div className="absolute w-[8px] h-[8px] border border-blue-900 left-[-4px] top-[-4px]"></div>
@@ -57,16 +57,16 @@ const Hero:React.FC = () => {
         
         <div className='hidden md:block'>
           <div className="relative max-w-[450px] h-[350px] mx-auto">
-            <div className='ngambang3 absolute left-5 -top-12 w-[250px] h-[200px]'>
+            <div data-aos="zoom-out" className='ngambang3 absolute top-5 lg:left-5 lg:-top-12 w-[200px] h-[150px] lg:w-[250px] lg:h-[200px]'>
               <img src={hero6} className="w-full h-full object-cover object-left rounded-lg" />
             </div>
-            <div className='ngambang1 absolute right-3 w-[150px] h-[150px]'>
+            <div data-aos="zoom-out" data-aos-delay="200"  className='ngambang1 absolute right-12 top-16 lg:right-3 lg:top-0 w-[100px] h-[100px] lg:w-[150px] lg:h-[150px]'>
               <img src={hero3} className="w-full h-full object-cover position-center rounded-lg" />
             </div>
-            <div className='ngambang4 absolute right-0 -bottom-5 w-[250px] h-[200px]'>
+            <div data-aos="zoom-out" data-aos-delay="400"  className='ngambang4 absolute right-0 bottom-0 lg:right-0 lg:-bottom-5 w-[200px] h-[150px] lg:w-[250px] lg:h-[200px]'>
               <img src={hero2} className="w-full h-full object-cover object-left rounded-lg" />
             </div>
-            <div className='ngambang2 absolute left-8 bottom-7 w-[150px] h-[150px]'>
+            <div data-aos="zoom-out" data-aos-delay="600"  className='ngambang2 absolute left-12 bottom-10 lg:left-8 lg:bottom-7 w-[100px] h-[100px] lg:w-[150px] lg:h-[150px]'>
               <img src={hero7} className="w-full h-full object-cover object-left rounded-lg" />
             </div>
             

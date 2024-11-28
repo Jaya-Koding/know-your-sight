@@ -52,28 +52,35 @@ const Login:React.FC = () => {
   }
 
   return (
-    <div className='h-screen flex items-center justify-center'>
-      <div className='relative w-[400px] border shadow-lg px-10 py-16 rounded-xl bg-white'>
-        <h4 className='text-center font-medium text-2xl mb-10'>Masuk</h4>
-        <form onSubmit={handleSubmit}>
-          <label className='text-sm'>Email</label>
-          <div className='border-b py-3 flex items-center gap-x-3 mb-5'>
-            <FaRegUser className='opacity-60' size={20}/>
-            <input onChange={handleChange} name='email' type="text" className='outline-none border-none w-full' placeholder='Masukan email kamu'/>
-          </div>
-          <label className='text-sm'>Password</label>
-          <div className='relative border-b py-3 flex items-center gap-x-3 mb-3'>
-            <MdOutlineLock className='opacity-60' size={25}/>
-            <input onChange={handleChange} name='password' type={showPassword? 'text' : 'password'} className='outline-none border-none w-full' placeholder='Masukan password kamu'/>
-            {showPassword? <FaRegEye onClick={()=>setShowPassword(prev => !prev)} size={20} className='cursor-pointer absolute right-5'/> : <FaRegEyeSlash onClick={()=>setShowPassword(prev => !prev)} size={20} className='cursor-pointer absolute right-5'/>}
-          </div>
-          <p className='text-[13px]'>Lupa password?</p>
-          <Button type='submit' className='w-full mt-10'>Masuk</Button>
-          <p className='text-sm mt-2'>Belum punya akun? <Link to={'/register'} className='underline'>daftar</Link></p>
-        </form>
+    <div className='h-screen grid lg:grid-cols-2'>
+      <div className='hidden bg-aksen lg:flex items-center justify-center'>
+        <div>
+          <h1 className='font-medium text-3xl text-white flex items-end'><span className='inline-block px-3 py-1 font-bold rounded bg-white text-aksen'>K</span>now <span className='inline-block px-3 py-1 font-bold rounded bg-white text-aksen ms-3'>Y</span>our <span className='inline-block px-3 py-1 font-bold rounded bg-white text-aksen ms-3'>S</span>ight</h1>
+        </div>
       </div>
-      {isWrong && <div className='absolute left-0 top-10 right-0 flex justify-center'><p className='text-red-500 text-sm mt-2'>{isWrong}</p></div>}
-      {isLoading && <Loading />}
+      <div className='relative flex items-center justify-center'>
+        <div className='relative w-[400px] px-10 py-16 rounded-xl bg-white'>
+          <h4 className='font-bold text-3xl text-slate-600 mb-10'>Login</h4>
+          <form onSubmit={handleSubmit}>
+            <label className='text-sm'>Email</label>
+            <div className='border-b py-3 flex items-center gap-x-3 mb-5'>
+              <FaRegUser className='opacity-60' size={20}/>
+              <input onChange={handleChange} name='email' type="text" className='outline-none border-none w-full' placeholder='Masukan email kamu'/>
+            </div>
+            <label className='text-sm'>Password</label>
+            <div className='relative border-b py-3 flex items-center gap-x-3 mb-3'>
+              <MdOutlineLock className='opacity-60' size={25}/>
+              <input onChange={handleChange} name='password' type={showPassword? 'text' : 'password'} className='outline-none border-none w-full' placeholder='Masukan password kamu'/>
+              {showPassword? <FaRegEye onClick={()=>setShowPassword(prev => !prev)} size={20} className='cursor-pointer absolute right-5'/> : <FaRegEyeSlash onClick={()=>setShowPassword(prev => !prev)} size={20} className='cursor-pointer absolute right-5'/>}
+            </div>
+            <p className='text-[13px]'>Lupa password?</p>
+            <Button type='submit' className='w-full mt-10'>Login</Button>
+            <p className='text-sm mt-2'>Belum punya akun? <Link to={'/register'} className='underline'>daftar</Link></p>
+          </form>
+        </div>
+        {isWrong && <div className='absolute left-0 top-10 right-0 flex justify-center'><p className='text-red-500 text-sm mt-2'>{isWrong}</p></div>}
+        {isLoading && <Loading />}
+      </div>
     </div>
   )
 }

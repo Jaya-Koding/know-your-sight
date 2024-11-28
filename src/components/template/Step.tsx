@@ -59,7 +59,7 @@ const Step: React.FC = () => {
         <h4 data-aos="fade-right" data-aos-delay="200" className="text-3xl mt-2">Join Us on the Journey</h4>
       </div>
       <div className="grid lg:grid-cols-2 py-28">
-        <div className="pt-10 px-16 sm:px-40 lg:px-0">
+        <div className="pt-10 px-18 sm:px-40 lg:px-0">
           <img data-aos="fade-up" data-aos-delay="200" src={stepImage} />
         </div>
 

@@ -89,45 +89,52 @@ const Register:React.FC = () => {
   }
 
   return (
-    <div className='h-screen flex items-center justify-center'>
-      <div className='relative w-[400px] border shadow-lg px-10 py-16 rounded-xl bg-white'>
-        {step&&<FaArrowLeft onClick={()=>setStep(false)} size={18} className='absolute top-10 left-8 opacity-55 hover:text-aksen cursor-pointer'/>}
-        <h4 className='text-center font-medium text-3xl mb-10'>Daftar</h4>
-        {!step ?
-          <form onSubmit={handleSubmitEmail}>
-            <label className='text-sm'>Username</label>
-            <div className='border-b py-3 flex items-center gap-x-3 mb-4'>
-              <FaRegUser className='opacity-60' size={20}/>
-              <input onChange={handleChange} value={newData.username} name='username' type="text" className='outline-none border-none w-full' placeholder='Masukan username'/>
-            </div>
-            <label className='text-sm'>Email</label>
-            <div className='border-b py-3 flex items-center gap-x-3 mb-3'>
-              <MdOutlineEmail className='opacity-60' size={24}/>
-              <input onChange={handleChange} value={newData.email} name='email' type="text" className='outline-none border-none w-full' placeholder='Masukan email'/>
-            </div>
-            <Button type='submit' className='w-full mt-10'>Berikutnya</Button>
-            <p className='text-sm mt-2'>Sudah punya akun? <Link to={'/login'} className='underline'>masuk</Link></p>
-          </form>
-        :
-        <form onSubmit={handleSubmitPassword}>
-            <label className='text-sm'>Password</label>
-            <div className='relative border-b py-3 flex items-center gap-x-3 mb-4'>
-              <MdOutlineLock className='opacity-60' size={25}/>
-              <input onChange={handleChange} value={newData.password}  name='password' type={showPassword==1?'text':'password'} className='outline-none border-none w-full' placeholder='Masukan password'/>
-              {showPassword==1? <FaRegEye onClick={()=>setShowPassword(null)} size={20} className='cursor-pointer absolute right-5'/> : <FaRegEyeSlash onClick={()=>setShowPassword(1)} size={20} className='cursor-pointer absolute right-5'/>}
-            </div>
-            <label className='text-sm'>Confirm password</label>
-            <div className='relative border-b py-3 flex items-center gap-x-3 mb-3'>
-              <MdOutlineLock className='opacity-60' size={25}/>
-              <input onChange={handleChange} value={newData.confirmPassword}  name='confirmPassword' type={showPassword==2?'text':'password'} className='outline-none border-none w-full' placeholder='Konfirmasi password'/>
-              {showPassword==2? <FaRegEye onClick={()=>setShowPassword(null)} size={20} className='cursor-pointer absolute right-5'/> : <FaRegEyeSlash onClick={()=>setShowPassword(2)} size={20} className='cursor-pointer absolute right-5'/>}
-            </div>
-            <Button type='submit' className='w-full mt-10'>Daftar</Button>
-          </form>
-        }
+    <div className='h-screen grid lg:grid-cols-2'>
+      <div className='hidden bg-aksen lg:flex items-center justify-center'>
+        <div>
+          <h1 className='font-medium text-3xl text-white flex items-end'><span className='inline-block px-3 py-1 font-bold rounded bg-white text-aksen'>K</span>now <span className='inline-block px-3 py-1 font-bold rounded bg-white text-aksen ms-3'>Y</span>our <span className='inline-block px-3 py-1 font-bold rounded bg-white text-aksen ms-3'>S</span>ight</h1>
+        </div>
       </div>
-      {isWrong && <div className='absolute left-0 top-10 right-0 flex justify-center'><p className='text-red-500 text-sm mt-2'>{isWrong}</p></div>}
-      {isLoading && <Loading />}
+      <div className='relative flex items-center justify-center'>
+        <div className='relative w-[400px] px-10 py-16 rounded-xl bg-white'>
+          {step&&<FaArrowLeft onClick={()=>setStep(false)} size={18} className='absolute top-0 left-8 opacity-55 hover:text-aksen cursor-pointer'/>}
+          <h4 className='font-bold text-3xl text-slate-600 mb-10'>Sign Up</h4>
+          {!step ?
+            <form onSubmit={handleSubmitEmail}>
+              <label className='text-sm'>Username</label>
+              <div className='border-b py-3 flex items-center gap-x-3 mb-4'>
+                <FaRegUser className='opacity-60' size={20}/>
+                <input onChange={handleChange} value={newData.username} name='username' type="text" className='outline-none border-none w-full' placeholder='Masukan username'/>
+              </div>
+              <label className='text-sm'>Email</label>
+              <div className='border-b py-3 flex items-center gap-x-3 mb-3'>
+                <MdOutlineEmail className='opacity-60' size={24}/>
+                <input onChange={handleChange} value={newData.email} name='email' type="text" className='outline-none border-none w-full' placeholder='Masukan email'/>
+              </div>
+              <Button type='submit' className='w-full mt-10'>Berikutnya</Button>
+              <p className='text-sm mt-2'>Sudah punya akun? <Link to={'/login'} className='underline'>masuk</Link></p>
+            </form>
+          :
+          <form onSubmit={handleSubmitPassword}>
+              <label className='text-sm'>Password</label>
+              <div className='relative border-b py-3 flex items-center gap-x-3 mb-4'>
+                <MdOutlineLock className='opacity-60' size={25}/>
+                <input onChange={handleChange} value={newData.password}  name='password' type={showPassword==1?'text':'password'} className='outline-none border-none w-full' placeholder='Masukan password'/>
+                {showPassword==1? <FaRegEye onClick={()=>setShowPassword(null)} size={20} className='cursor-pointer absolute right-5'/> : <FaRegEyeSlash onClick={()=>setShowPassword(1)} size={20} className='cursor-pointer absolute right-5'/>}
+              </div>
+              <label className='text-sm'>Confirm password</label>
+              <div className='relative border-b py-3 flex items-center gap-x-3 mb-3'>
+                <MdOutlineLock className='opacity-60' size={25}/>
+                <input onChange={handleChange} value={newData.confirmPassword}  name='confirmPassword' type={showPassword==2?'text':'password'} className='outline-none border-none w-full' placeholder='Konfirmasi password'/>
+                {showPassword==2? <FaRegEye onClick={()=>setShowPassword(null)} size={20} className='cursor-pointer absolute right-5'/> : <FaRegEyeSlash onClick={()=>setShowPassword(2)} size={20} className='cursor-pointer absolute right-5'/>}
+              </div>
+              <Button type='submit' className='w-full mt-10'>Daftar</Button>
+            </form>
+          }
+        </div>
+        {isWrong && <div className='absolute left-0 top-10 right-0 flex justify-center'><p className='text-red-500 text-sm mt-2'>{isWrong}</p></div>}
+        {isLoading && <Loading />}
+      </div>
     </div>
   )
 }
