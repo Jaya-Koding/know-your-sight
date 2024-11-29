@@ -3,7 +3,7 @@ import AOS from 'aos'
 import "aos/dist/aos.css"
 import hero5 from './../assets/images/hero5.jpg'
 import Navbar from '../components/template/Navbar'
-import abdil from '../assets/images/abdil.png'
+import abdil from '../assets/images/abdil.jpg'
 import jimly from '../assets/images/jimly.jpg'
 import iwan from '../assets/images/iwan.jpg'
 

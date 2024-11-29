@@ -82,3 +82,34 @@ body {
 .putar1 {
   animation: putar 9s linear infinite;
 }
+
+/* Loading */
+/* HTML: <div class="loader"></div> */
+.loader1 {
+  width: 100%;
+  aspect-ratio: 1;
+  background:
+    linear-gradient(to bottom right,#0000 calc(50% - 40px), #eaeaea 50%, #0000 calc(50% + 40px)) 
+    bottom right/calc(200% + 80px) calc(200% + 80px);
+  animation: l8 1.5s infinite ;
+  bacground-repeat: no-repeat;
+}
+@keyframes l8 {
+    100% {background-position: top left}
+}
+
+/* Gaya scrollbar vertikal */
+.output::-webkit-scrollbar {
+  width: 5px; /* lebar scrollbar */
+}
+
+/* Gaya thumb (handle) scrollbar */
+.output::-webkit-scrollbar-thumb {
+  background-color: #b1afaf; /* warna thumb */
+  border-radius: 4px; /* bentuk thumb */
+}
+
+/* Gaya track (jalur) scrollbar */
+.output::-webkit-scrollbar-track {
+  background-color: #fff; /* warna track */
+}
