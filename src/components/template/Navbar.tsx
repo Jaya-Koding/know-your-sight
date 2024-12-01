@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from '../atoms/Button'
-import { Eye, Home, Info, Menu } from 'lucide-react'
+import { Eye, Home, Info, LogOut, Menu, Settings } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
+import { FaRegUser } from 'react-icons/fa'
+import { GrUpgrade } from 'react-icons/gr'
 
 const Navbar:React.FC = () => {
   const navigate = useNavigate()
   const { user, getCookie, deleteCookie } = useAuth()
   const [logout, setLogout] = useState<boolean>(false)
+  const [isMenu, setIsMenu] = useState<boolean>(false)
   const [isMenuMobile, setIsMenuMobile] = useState<boolean>(false)
 
   useEffect(()=>{
@@ -38,7 +41,35 @@ const Navbar:React.FC = () => {
         </ul>
         <div>
           {user !== null?
-            <Button onClick={handleLogout} className={'hidden sm:block bg-red-500'} type='button'>Logout</Button>
+            <div className='relative'>
+              <div onClick={()=>setIsMenu(prev => !prev)} className='absolute cursor-pointer -top-5 right-0 p-2.5 rounded-full bg-slate-100'>
+                <FaRegUser size={18} className='text-slate-600'/>
+              </div>
+              {isMenu && 
+                <div className="absolute text-slate-700 text-sm left-[-300px] top-10 w-[300px] bg-white border rounded-xl p-3 flex flex-col">
+                  <div className='flex items-center gap-x-3 hover:bg-slate-100 p-3 rounded-lg'>
+                    <FaRegUser size={20}/>
+                    <p>{user.name}</p>
+                  </div>
+                  <div className='flex items-center gap-x-3 hover:bg-slate-100 p-3 rounded-lg mb-1'>
+                    <Settings size={20}/>
+                    <p>Settings</p>
+                  </div>
+                  <hr />
+                  <Link to={'/upgrade'}>
+                    <div className='flex items-center gap-x-3 hover:bg-slate-100 p-3 my-1 rounded-lg'>
+                      <GrUpgrade size={20}/>
+                      <p>Upgrade Plan</p>
+                    </div>
+                  </Link>
+                  <hr />
+                  <div onClick={handleLogout} className='flex cursor-pointer items-center gap-x-3 hover:bg-slate-100 p-3 mt-1 rounded-lg'>
+                    <LogOut size={20}/>
+                    <p>Logout</p>
+                  </div>
+                </div>
+              }
+            </div>
           :
             <Link to={'/login'}>
               <Button className={'hidden sm:block'} type='button'>Login</Button>

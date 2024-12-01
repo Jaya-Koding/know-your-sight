@@ -5,6 +5,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Detection from "./pages/Detection"
 import AboutUs from "./pages/AboutUs"
+import UpgradePlan from "./pages/UpgradePlan"
 
 const App:React.FC = () => {
 
@@ -17,6 +18,7 @@ const App:React.FC = () => {
           <Route path="/register" element={<Register />}/>
           <Route path="/detection" element={<Detection />}/>
           <Route path="/about" element={<AboutUs />}/>
+          <Route path="/upgrade" element={<UpgradePlan />}/>
         </Routes>
       </div>
     </Router>

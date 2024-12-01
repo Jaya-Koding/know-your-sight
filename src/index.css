@@ -113,3 +113,33 @@ body {
 .output::-webkit-scrollbar-track {
   background-color: #fff; /* warna track */
 }
+
+// result detection style
+#content-container {
+
+}
+
+#content-container p {
+  font-size: 16px;
+}
+
+#content-container ul {
+  font-size: 15px;
+  padding-left: 20px;
+}
+
+#content-container ul strong {
+  font-weight: 600;
+}
+
+#content-container li {
+  margin-bottom: 5px;
+}
+
+#content-container strong {
+  font-weight: 600;
+}
+
+#content-container p strong {
+  font-weight: 600;
+}
