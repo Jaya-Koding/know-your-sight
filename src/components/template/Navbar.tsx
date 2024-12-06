@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from '../atoms/Button'
-import { Eye, Home, Info, LogOut, Menu, Settings } from 'lucide-react'
+import { Eye, Home, Info, LogOut, Menu } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { FaRegUser } from 'react-icons/fa'
 import { GrUpgrade } from 'react-icons/gr'
