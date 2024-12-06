@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Minus, Plus } from "lucide-react";
-import stepImage from './../../assets/images/step.png'
 import vector from './../../assets/images/vector.png'
 import AOS from 'aos'
 import "aos/dist/aos.css"
