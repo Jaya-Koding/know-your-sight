@@ -22,9 +22,9 @@ const UpgradePlan:React.FC = () => {
                     </ul>
                 </div>
                 <div className='border p-7 rounded-lg'>
-                    <h4 className='text-2xl font-medium'>Free</h4>
+                    <h4 className='text-2xl font-medium'>Plus</h4>
                     <div className='my-5'>
-                        <p><span className='text-4xl'>Rp0</span> / month</p>
+                        <p><span className='text-4xl'>Rp150.000</span> / month</p>
                         <p className='text-sm mt-3'>Explore how AI can help you with everyday tasks</p>
                     </div>
                     <p className='my-5 p-3 rounded-full text-sm text-center text-white bg-aksen'>Upgrade</p>

@@ -38,17 +38,17 @@ const Hero:React.FC = () => {
     <div className=' bg-secondary'>
       <div className='max-w-[1080px] mx-auto grid md:grid-cols-2 pt-52 pb-28 px-5 items-center'>
         <div className='relative'>
-          <div data-aos="fade-right" className='text-4xl font-medium'><p className='mb-2'>AI-Powered</p> <p>Eye Care <span className='inline-block mt-3 md:mt-0 border relative border-blue-900 px-3 pb-1 text-blue-900'>
-            Inovations 
+          <div data-aos="fade-right" className='text-4xl font-medium'><p className='mb-2'>Empowering Eye Health </p> <p>with <span className='inline-block mt-3 md:mt-0 border relative border-blue-900 px-3 pb-1 text-blue-900'>
+            AI Precision 
             <div className="absolute w-[8px] h-[8px] border border-blue-900 left-[-4px] bottom-[-4px]"></div>
             <div className="absolute w-[8px] h-[8px] border border-blue-900 left-[-4px] top-[-4px]"></div>
             <div className="absolute w-[8px] h-[8px] border border-blue-900 right-[-4px] top-[-4px]"></div>
             <div className="absolute w-[8px] h-[8px] border border-blue-900 right-[-4px] bottom-[-4px]"></div>
             </span></p>
           </div>
-          <p data-aos="fade-right" className='my-10 text-gray-500'><span className='font-medium'>Know Your Sight</span> is an industry leader in developing sophisticated and revolutionary AI powered eye disease detection and management solutions.</p>
+          <p data-aos="fade-right" className='my-10 text-gray-500'><span className='font-medium'>Know Your Sight</span> combines advanced AI technology with web-based accessibility to deliver accurate, actionable eye disease detection for professionals and individuals alike.</p>
           <div className="cta-box">
-            <Button onClick={directToDetection} dataAos={{type:"fade-right", delay:"200"}} type='button' className='flex gap-x-2 items-center'>Lets Detection <ArrowRight size={20} className='mt-0.5'/></Button>
+            <Button onClick={directToDetection} dataAos={{type:"fade-right", delay:"200"}} type='button' className='flex gap-x-2 items-center'>Launch app <ArrowRight size={20} className='mt-0.5'/></Button>
           </div>
           <div className='absolute left-0 top-[-50px]'>
               <img src={apple} className='w-[70px]' />

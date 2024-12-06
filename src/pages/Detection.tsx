@@ -1,6 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Client } from "@gradio/client";
 import ContentRenderer from '../components/template/ContentRenderer';
+import { useAuth } from '../context/AuthContext';
+import { FaRegUser } from 'react-icons/fa';
+import { History } from 'lucide-react';
+
+const NavbarDetection:React.FC<{username:string|undefined}> = ({ username }) => {
+  return (
+    <div className='max-w-[1600px] mx-auto px-10 py-5 flex items-center justify-between'>
+      <h5 className='text-xl'>Know Your Sight</h5>
+      <div className='flex items-center gap-x-3'>
+        <div className='flex items-center gap-x-2 cursor-pointer px-2 py-1 rounded-md hover:bg-slate-100'>
+          <p>History</p>
+          <History size={23}/>
+        </div>
+        <div className='flex items-center gap-x-2 cursor-pointer px-2 py-1 rounded-md hover:bg-slate-100'>
+          <p>{username}</p>
+          <FaRegUser size={20}/>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 interface DetectionResult {
   label: string
@@ -9,7 +30,6 @@ interface DetectionResult {
     confidence: number;
   }[];
 }
-
 
 const detection = async (image:Blob) => {
   const client = await Client.connect("dielz/eye-disease-classification");
@@ -21,12 +41,17 @@ const detection = async (image:Blob) => {
 }
 
 const Detection:React.FC = () => {
+  const { user, getCookie } = useAuth();
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [label, setLabel] = useState<string|null>(null);
   const [result, setResult] = useState<string|null>(null);
   const [confidience, setConfidience] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(()=>{
+    getCookie()
+  }, [])
 
   // Fungsi untuk menangani unggah gambar
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,7 +131,10 @@ const Detection:React.FC = () => {
   }
 
   return (
-    <div className='bg-secondary'>
+    <div className='bg-secondary relative pt-16'>
+      <div className='bg-white fixed top-0 right-0 left-0'>
+        <NavbarDetection username={user?.name}/>
+      </div>
       <div className='max-w-[1600px] mx-auto p-10 h-screen'>
         <div className='grid md:grid-cols-2 gap-5'>
           <div>
@@ -153,7 +181,6 @@ const Detection:React.FC = () => {
               </div>
             </div>
             <div className='p-3 border rounded-lg mt-3 bg-white min-h-[600px] max-h-[700px] overflow-y-scroll output'>
-              {/* {result && <div  dangerouslySetInnerHTML={{ __html: result }}></div>} */}
               <ContentRenderer content={result} />
             </div>
           </div>

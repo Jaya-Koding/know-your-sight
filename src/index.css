@@ -125,7 +125,7 @@ body {
 
 #content-container ul {
   font-size: 15px;
-  padding-left: 20px;
+  padding-left: 25px;
 }
 
 #content-container ul strong {
@@ -133,7 +133,7 @@ body {
 }
 
 #content-container li {
-  margin-bottom: 5px;
+  margin: 8px 0;
 }
 
 #content-container strong {

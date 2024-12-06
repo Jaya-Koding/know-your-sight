@@ -41,19 +41,15 @@ const Navbar:React.FC = () => {
         </ul>
         <div>
           {user !== null?
-            <div className='relative'>
+            <div className='relative hidden sm:block'>
               <div onClick={()=>setIsMenu(prev => !prev)} className='absolute cursor-pointer -top-5 right-0 p-2.5 rounded-full bg-slate-100'>
                 <FaRegUser size={18} className='text-slate-600'/>
               </div>
               {isMenu && 
                 <div className="absolute text-slate-700 text-sm left-[-300px] top-10 w-[300px] bg-white border rounded-xl p-3 flex flex-col">
-                  <div className='flex items-center gap-x-3 hover:bg-slate-100 p-3 rounded-lg'>
+                  <div className='flex items-center gap-x-3 hover:bg-slate-100 p-3 rounded-lg mb-1'>
                     <FaRegUser size={20}/>
                     <p>{user.name}</p>
-                  </div>
-                  <div className='flex items-center gap-x-3 hover:bg-slate-100 p-3 rounded-lg mb-1'>
-                    <Settings size={20}/>
-                    <p>Settings</p>
                   </div>
                   <hr />
                   <Link to={'/upgrade'}>
@@ -77,13 +73,30 @@ const Navbar:React.FC = () => {
           }
           <Menu onClick={()=>setIsMenuMobile(prev => !prev)}  className='block sm:hidden cursor-pointer'/>
           {isMenuMobile && 
-            <div className='absolute top-16 left-0 right-0 bg-white p-5 shadow-md'>
+            <div className='absolute text-slate-700  text-sm sm:hidden top-16 left-0 right-0 bg-white p-5 shadow-md'>
               <ul className=''>
                 <Link to={'/'}><li className='py-3 px-5 hover:bg-slate-200 rounded flex items-center gap-x-2'><Home /> Home</li></Link>
                 <Link to={'/about'}><li className='py-3 px-5 hover:bg-slate-200 rounded flex items-center gap-x-2'><Info /> About</li></Link>
-                <Link to={'/detection'}><li className='py-3 px-5 hover:bg-slate-200 rounded flex items-center gap-x-2'><Eye /> Detection</li></Link>
+                <li onClick={directToDetection} className='cursor-pointer py-3 px-5 hover:bg-slate-200 rounded flex items-center gap-x-2'><Eye /> Detection</li>
                 {user !== null?
-                  <Button onClick={handleLogout} className={'w-full mt-5 bg-red-500'} type='button'>Logout</Button>
+                  <div className="bg-white border rounded-xl p-3 flex flex-col mt-3">
+                    <div className='flex items-center gap-x-3 hover:bg-slate-100 p-3 rounded-lg mb-1'>
+                      <FaRegUser size={20}/>
+                      <p>{user.name}</p>
+                    </div>
+                    <hr />
+                    <Link to={'/upgrade'}>
+                      <div className='flex items-center gap-x-3 hover:bg-slate-100 p-3 my-1 rounded-lg'>
+                        <GrUpgrade size={20}/>
+                        <p>Upgrade Plan</p>
+                      </div>
+                    </Link>
+                    <hr />
+                    <div onClick={handleLogout} className='flex cursor-pointer items-center gap-x-3 hover:bg-slate-100 p-3 mt-1 rounded-lg'>
+                      <LogOut size={20}/>
+                      <p>Logout</p>
+                    </div>
+                  </div>
                 :
                   <Link className='mx-auto' to={'/login'}>
                     <Button className='w-full mt-5' type='button'>Login</Button>
