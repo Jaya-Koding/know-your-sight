@@ -36,7 +36,7 @@ const Step: React.FC = () => {
         "After the scan, receive a detailed diagnosis. The results are easy to understand and designed to guide medical professionals and patients toward informed decisions.",
     },
     {
-      point: "Recomended",
+      point: "Recommend",
       short:'"Your Next Steps, Simplified"',
       explain:
         "Based on the diagnosis, our platform provides tailored recommendations. Whether it’s further medical evaluation or routine monitoring, Know Your Sight ensures you’re never left guessing what to do next.",
@@ -59,7 +59,7 @@ const Step: React.FC = () => {
           <img data-aos="fade-up" data-aos-delay="200" src={vector} />
         </div>
 
-        <div className="mt-28 ms-5 text-slate-600">
+        <div className="lg:mt-28 ms-5 text-slate-600">
           {step.map((item, index) => (
             <div key={index} data-aos="fade-up" className="border-b">
               <div className="flex items-center justify-between py-4">

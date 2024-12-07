@@ -37,6 +37,7 @@ const Navbar:React.FC = () => {
         <ul className='hidden sm:flex items-center gap-x-7 text-lg text-slate-500'>
           <Link to={'/'}><li>Home</li></Link>
           <Link to={'/about'}><li>About</li></Link>
+          <Link to={'/upgrade'}><li>Pricing</li></Link>
           <li onClick={directToDetection} className='cursor-pointer'>Detection</li>
         </ul>
         <div>

@@ -3,7 +3,7 @@ import { Client } from "@gradio/client";
 import ContentRenderer from '../components/template/ContentRenderer';
 import { useAuth } from '../context/AuthContext';
 import { FaRegUser } from 'react-icons/fa';
-import { History } from 'lucide-react';
+import { ArrowLeft, History } from 'lucide-react';
 
 const NavbarDetection:React.FC<{username:string|undefined}> = ({ username }) => {
   return (
@@ -18,6 +18,22 @@ const NavbarDetection:React.FC<{username:string|undefined}> = ({ username }) => 
           <p>{username}</p>
           <FaRegUser size={20}/>
         </div>
+      </div>
+    </div>
+  )
+}
+
+interface PopUpDetectionProps {
+  img?: string;
+  label: string;
+  setPopup: () => void;
+}
+
+const PopUpDetection:React.FC<PopUpDetectionProps> = ({label, img, setPopup}) => {
+  return (
+    <div className='fixed bg-black bg-opacity-5 top-0 left-0 right-0 bottom-0 flex items-center justify-center'>
+      <div className='bg-white absolute w-full h-full md:w-[80%] md:h-[90%] lg:max-w-[1000px] rounded-lg'>
+        <ArrowLeft  className='absolute top-5 left-5 cursor-pointer hover:text-slate-400' onClick={() => setPopup()}/>
       </div>
     </div>
   )
@@ -48,6 +64,7 @@ const Detection:React.FC = () => {
   const [result, setResult] = useState<string|null>(null);
   const [confidience, setConfidience] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [popUp, setPopUp] = useState<boolean>(false);
 
   useEffect(()=>{
     getCookie()
@@ -138,7 +155,7 @@ const Detection:React.FC = () => {
       <div className='max-w-[1600px] mx-auto p-10 h-screen'>
         <div className='grid md:grid-cols-2 gap-5'>
           <div>
-            <div className='border p-3 rounded-lg bg-white'>
+            <div className='border p-3 rounded-lg bg-white min-h-[330px]'>
               {image ? (
                 <div className='relative max-w-[300px] max-h-[300px] mx-auto'>
                   <div className={`${isLoading && 'loader1'} absolute rounded-lg`}></div>
@@ -167,6 +184,21 @@ const Detection:React.FC = () => {
                 {isLoading? 'Detection...': 'Submit'}
               </button>
             </div>
+            <div className='border rounded-lg flex items-center gap-x-2 bg-white p-2 mt-10 '>
+              <div className='w-[100px] h-[100px] rounded-md bg-slate-200'></div>
+              <div className='w-[100px] h-[100px] rounded-md bg-slate-200'></div>
+              <div className='w-[100px] h-[100px] rounded-md bg-slate-200'></div>
+              <div className='w-[100px] h-[100px] rounded-md bg-slate-200'></div>
+            </div>
+            <div className='mt-10'>
+              <h5 className='border-b pb-2 mb-5'>Recent detection</h5>
+              <div>
+                <div onClick={()=>setPopUp(prev => !prev)} className='flex items-center gap-x-3 p-2 border rounded-md cursor-pointer'>
+                  <div className='w-[50px] h-[50px] rounded-md bg-slate-200'></div>
+                  <p>{label&&label}</p>
+                </div>
+              </div>
+            </div>
           </div>
           <div>
             <div className='p-3 border rounded-lg bg-white'>
@@ -185,6 +217,14 @@ const Detection:React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Popup */}
+      {popUp && <PopUpDetection label='tes' setPopup={() => setPopUp(false)}/>}
+
+      {/* Sidebar history */}
+      <div className='fixed top-16 right-0 w-[400px] bottom-0 bg-white bg-opacity-50 '>
+
       </div>
     </div>
   )

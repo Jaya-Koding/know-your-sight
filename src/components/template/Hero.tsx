@@ -38,7 +38,7 @@ const Hero:React.FC = () => {
     <div className=' bg-secondary'>
       <div className='max-w-[1080px] mx-auto grid md:grid-cols-2 pt-52 pb-28 px-5 items-center'>
         <div className='relative'>
-          <div data-aos="fade-right" className='text-4xl font-medium'><p className='mb-2'>Empowering Eye Health </p> <p>with <span className='inline-block mt-3 md:mt-0 border relative border-blue-900 px-3 pb-1 text-blue-900'>
+          <div data-aos="fade-right" className='text-4xl font-medium'><p className='mb-2'>Empowering Eye Health with</p> <p><span className='inline-block mt-3 md:mt-0 border relative border-blue-900 px-3 pb-1 text-blue-900'>
             AI Precision 
             <div className="absolute w-[8px] h-[8px] border border-blue-900 left-[-4px] bottom-[-4px]"></div>
             <div className="absolute w-[8px] h-[8px] border border-blue-900 left-[-4px] top-[-4px]"></div>
