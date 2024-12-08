@@ -5,6 +5,8 @@ import { Eye, Home, Info, LogOut, Menu } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { FaRegUser } from 'react-icons/fa'
 import { GrUpgrade } from 'react-icons/gr'
+import logo from './../../assets/images/logo.png'
+import icon from './../../assets/images/icon.png'
 
 const Navbar:React.FC = () => {
   const navigate = useNavigate()
@@ -33,12 +35,13 @@ const Navbar:React.FC = () => {
   return (
     <div className='fixed top-0 right-0 left-0 z-50 bg-white'>
       <div className="max-w-[1080px] mx-auto flex items-center py-5 justify-between px-5">
-        <div className="logo text-3xl font-bold text-slate-600">KY<span className='text-aksen'>S</span></div>
+        <div className="logo text-3xl font-bold text-slate-600"><Link to={'/'}><img src={logo} className='h-[35px]' /></Link></div>
         <ul className='hidden sm:flex items-center gap-x-7 text-lg text-slate-500'>
           <Link to={'/'}><li>Home</li></Link>
           <Link to={'/about'}><li>About</li></Link>
           <Link to={'/upgrade'}><li>Pricing</li></Link>
-          <li onClick={directToDetection} className='cursor-pointer'>Detection</li>
+          <Link to={'/introduction'}><li>Detection</li></Link>
+          {/* <li onClick={directToDetection} className='cursor-pointer'>Detection</li> */}
         </ul>
         <div>
           {user !== null?

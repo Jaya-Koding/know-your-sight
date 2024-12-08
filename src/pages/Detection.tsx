@@ -10,6 +10,9 @@ import sample1 from './../assets/images/sample1.png';
 import sample2 from './../assets/images/sample2.png';
 import sample3 from './../assets/images/sample3.png';
 import sample4 from './../assets/images/sample4.png';
+import icon from './../assets/images/icon.png';
+import logo from './../assets/images/logo.png';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface NavbarDetectionProps {
   username: string|undefined;
@@ -19,7 +22,7 @@ interface NavbarDetectionProps {
 const NavbarDetection:React.FC<NavbarDetectionProps> = ({ username, setHistory }) => {
   return (
     <div className='max-w-[1600px] mx-auto px-10 py-5 flex items-center justify-between'>
-      <h5 className='text-xl'>Know Your Sight</h5>
+      <h5 className='text-xl'><Link to={'/'}><img src={logo} className='h-[35px]' /></Link></h5>
       <div className='flex items-center gap-x-3'>
         <div onClick={() => setHistory()} className='flex items-center gap-x-2 cursor-pointer px-2 py-1 rounded-md hover:bg-slate-100'>
           <p>History</p>
@@ -95,39 +98,6 @@ const PopUpDetection:React.FC<PopUpDetectionProps> = ({label, img, percent, setP
   )
 }
 
-// const PdfPrint:React.FC = () => {
-//   return (
-//     <div className='absolute left-0 right-0 top-0 bottom-0 bg-white p-10 pt-16'>
-//       <div className='md:w-[700px] lg:w-[800px] mx-auto h-full border px-10'>
-//         <div className='header py-5'>
-//           <h1 className='text-xl font-bold text-center mt-12 text-aksen'>KNOW YOUR SIGHT</h1>
-//           <p className='text-center text-sm mt-2'>Empowering Eye Health with AI Precision</p>
-//         </div>
-//         <hr />
-//         <div>
-//           <div className="text-sm w-[400px] grid grid-cols-3 gap-y-2 mt-10">
-//             <p>Name</p>
-//             <p className='col-span-2'>: Jimly Assidqi</p>
-//             <p>Email</p>
-//             <p className='col-span-2'>: jimlyasidqi@gmail.com</p>
-//             <p>Date</p>
-//             <p className='col-span-2'>: 2024/12/22</p>
-//           </div>
-//         </div>
-//         <h5 className='mt-16 mb-2'>Report</h5>
-//         <div className='border grid grid-cols-4 text-sm'>
-//           <p className='border-b py-3 ps-2'>Diagnose</p>
-//           <p className='col-span-3 border-b py-3 border-s px-2'>Cataract</p>
-//           <p className='border-b py-3 ps-2'>Percent</p>
-//           <p className='col-span-3 border-b py-3 border-s px-2'>94%</p>
-//           <p className='border-b py-3 ps-2'>Recomendation</p>
-//           <p className='col-span-3 border-b py-3 border-s px-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nostrum neque, voluptatem et facere non laboriosam, cum quos consequuntur odio quod earum esse.</p>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
 interface DetectionResult {
   label: string
   confidences: {
@@ -153,6 +123,7 @@ interface HistoryDetectionType {
 }
 
 const Detection:React.FC = () => {
+  const navigate = useNavigate();
   const { user, getCookie } = useAuth();
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -163,6 +134,12 @@ const Detection:React.FC = () => {
   const [popUp, setPopUp] = useState<boolean>(false);
   const [isHistory, setIsHistory] = useState<boolean>(false);
   const [historyDetection, setHistoryDetection] = useState<HistoryDetectionType[]>([]);
+
+  const handleNavigate = (img:string, label:string, percent:number, result:string) => {
+    navigate('/history', {
+      state: {img: img, label: label, percent: percent, result: result }, // Data yang dikirim
+    });
+  };
 
   useEffect(()=>{
     getCookie()
@@ -271,10 +248,10 @@ const Detection:React.FC = () => {
 
   return (
     <div className='bg-secondary relative pt-16'>
-      <div className='bg-white fixed top-0 right-0 left-0'>
+      <div className='bg-white fixed z-20 top-0 right-0 left-0'>
         <NavbarDetection username={user?.name} setHistory={()=>setIsHistory(!isHistory)}/>
       </div>
-      <div className='max-w-[1600px] mx-auto md:p-10 h-screen'>
+      <div className='max-w-[1600px] mx-auto md:p-10 min-h-screen'>
         <div className='grid md:grid-cols-2 gap-5'>
           <div>
             <div className='border p-3 rounded-lg bg-white min-h-[330px]'>
@@ -299,10 +276,10 @@ const Detection:React.FC = () => {
               )}
             </div>
             <div className='flex items-center gap-3'>
-              <button onClick={handleClear} className={`mt-3 w-full border border-orange-600 hover:bg-orange-50 text-orange-600 font-medium py-2 px-4 rounded`}>
+              <button onClick={handleClear} className={`mt-3 w-full border border-aksen hover:bg-orange-50 text-aksen font-medium py-2 px-4 rounded`}>
                 Clear
               </button>
-              <button onClick={handleSubmit} disabled={isLoading} className={`mt-3 w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded`}>
+              <button onClick={handleSubmit} disabled={isLoading} className={`mt-3 w-full bg-aksen hover:bg-blue-900 text-white font-medium py-2 px-4 rounded`}>
                 {isLoading? 'Detection...': 'Submit'}
               </button>
             </div>
@@ -319,7 +296,7 @@ const Detection:React.FC = () => {
               <h5 className='border-b pb-2 mb-5 text-sm'>Recent detection</h5>
               <div className='grid lg:grid-cols-2 items-center gap-3'>
                 {historyDetection.slice(-2).map((item, index) => (
-                  <div key={index} onClick={()=>setPopUp(prev => !prev)} className='flex items-center justify-between p-2 border rounded-md cursor-pointer mb-2'>
+                  <div key={index} onClick={()=>handleNavigate(item.img !== undefined ? item.img : '', item.label, item.percent, item.recommendation)} className='flex items-center justify-between p-2 border rounded-md cursor-pointer mb-2 bg-white'>
                     <div className='flex items-center gap-x-3'>
                       <div className='w-[50px] h-[50px] rounded bg-slate-200 overflow-hidden'><img src={item.img} alt="" /></div>
                       <p>{item.label}</p>
@@ -337,7 +314,7 @@ const Detection:React.FC = () => {
                 <h6 className='font-medium text-center py-5 text-xl'>{label?label:<p className='opacity-50'>Diagnosis</p>}</h6>
                 <div>
                   <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                    <div className="bg-orange-600 text-xs font-medium text-orange-100 text-center p-0.5 leading-none rounded-full" style={{ width: confidience+'%' }}>{confidience&&`${confidience}%`}</div>
+                    <div className="bg-aksen text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style={{ width: confidience+'%' }}>{confidience&&`${confidience}%`}</div>
                   </div>
                 </div>
               </div>
@@ -361,7 +338,7 @@ const Detection:React.FC = () => {
           </div>
           <div className='p-3 mt-3'>
             {historyDetection.map((item, index) => (
-              <div key={index} onClick={()=>setPopUp(prev => !prev)} className='flex items-center justify-between p-2 border rounded-md cursor-pointer mb-2'>
+              <div key={index} onClick={()=>handleNavigate(item.img !== undefined ? item.img : '', item.label, item.percent, item.recommendation)} className='flex items-center justify-between p-2 border rounded-md cursor-pointer mb-2'>
                 <div className='flex items-center gap-x-3'>
                   <div className='w-[50px] h-[50px] rounded bg-slate-200 overflow-hidden'><img src={item.img} alt="" /></div>
                   <p>{item.label}</p>
@@ -371,9 +348,6 @@ const Detection:React.FC = () => {
             ))}
           </div>
       </div>
-
-      {/* PDF PRINT */}
-      {/* <PdfPrint /> */}
     </div>
   )
 }
