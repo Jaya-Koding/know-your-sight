@@ -95,38 +95,38 @@ const PopUpDetection:React.FC<PopUpDetectionProps> = ({label, img, percent, setP
   )
 }
 
-const PdfPrint:React.FC = () => {
-  return (
-    <div className='absolute left-0 right-0 top-0 bottom-0 bg-white p-10 pt-16'>
-      <div className='md:w-[700px] lg:w-[800px] mx-auto h-full border px-10'>
-        <div className='header py-5'>
-          <h1 className='text-xl font-bold text-center mt-12 text-aksen'>KNOW YOUR SIGHT</h1>
-          <p className='text-center text-sm mt-2'>Empowering Eye Health with AI Precision</p>
-        </div>
-        <hr />
-        <div>
-          <div className="text-sm w-[400px] grid grid-cols-3 gap-y-2 mt-10">
-            <p>Name</p>
-            <p className='col-span-2'>: Jimly Assidqi</p>
-            <p>Email</p>
-            <p className='col-span-2'>: jimlyasidqi@gmail.com</p>
-            <p>Date</p>
-            <p className='col-span-2'>: 2024/12/22</p>
-          </div>
-        </div>
-        <h5 className='mt-16 mb-2'>Report</h5>
-        <div className='border grid grid-cols-4 text-sm'>
-          <p className='border-b py-3 ps-2'>Diagnose</p>
-          <p className='col-span-3 border-b py-3 border-s px-2'>Cataract</p>
-          <p className='border-b py-3 ps-2'>Percent</p>
-          <p className='col-span-3 border-b py-3 border-s px-2'>94%</p>
-          <p className='border-b py-3 ps-2'>Recomendation</p>
-          <p className='col-span-3 border-b py-3 border-s px-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nostrum neque, voluptatem et facere non laboriosam, cum quos consequuntur odio quod earum esse.</p>
-        </div>
-      </div>
-    </div>
-  )
-}
+// const PdfPrint:React.FC = () => {
+//   return (
+//     <div className='absolute left-0 right-0 top-0 bottom-0 bg-white p-10 pt-16'>
+//       <div className='md:w-[700px] lg:w-[800px] mx-auto h-full border px-10'>
+//         <div className='header py-5'>
+//           <h1 className='text-xl font-bold text-center mt-12 text-aksen'>KNOW YOUR SIGHT</h1>
+//           <p className='text-center text-sm mt-2'>Empowering Eye Health with AI Precision</p>
+//         </div>
+//         <hr />
+//         <div>
+//           <div className="text-sm w-[400px] grid grid-cols-3 gap-y-2 mt-10">
+//             <p>Name</p>
+//             <p className='col-span-2'>: Jimly Assidqi</p>
+//             <p>Email</p>
+//             <p className='col-span-2'>: jimlyasidqi@gmail.com</p>
+//             <p>Date</p>
+//             <p className='col-span-2'>: 2024/12/22</p>
+//           </div>
+//         </div>
+//         <h5 className='mt-16 mb-2'>Report</h5>
+//         <div className='border grid grid-cols-4 text-sm'>
+//           <p className='border-b py-3 ps-2'>Diagnose</p>
+//           <p className='col-span-3 border-b py-3 border-s px-2'>Cataract</p>
+//           <p className='border-b py-3 ps-2'>Percent</p>
+//           <p className='col-span-3 border-b py-3 border-s px-2'>94%</p>
+//           <p className='border-b py-3 ps-2'>Recomendation</p>
+//           <p className='col-span-3 border-b py-3 border-s px-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nostrum neque, voluptatem et facere non laboriosam, cum quos consequuntur odio quod earum esse.</p>
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
 
 interface DetectionResult {
   label: string
