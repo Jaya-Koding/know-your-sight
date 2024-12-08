@@ -1,16 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 import { Client } from "@gradio/client";
 import ContentRenderer from '../components/template/ContentRenderer';
 import { useAuth } from '../context/AuthContext';
 import { FaRegUser } from 'react-icons/fa';
-import { ArrowLeft, History } from 'lucide-react';
+import { ArrowLeft, ArrowRight, History, Printer } from 'lucide-react';
+import sample1 from './../assets/images/sample1.png';
+import sample2 from './../assets/images/sample2.png';
+import sample3 from './../assets/images/sample3.png';
+import sample4 from './../assets/images/sample4.png';
 
-const NavbarDetection:React.FC<{username:string|undefined}> = ({ username }) => {
+interface NavbarDetectionProps {
+  username: string|undefined;
+  setHistory: () => void;
+}
+
+const NavbarDetection:React.FC<NavbarDetectionProps> = ({ username, setHistory }) => {
   return (
     <div className='max-w-[1600px] mx-auto px-10 py-5 flex items-center justify-between'>
       <h5 className='text-xl'>Know Your Sight</h5>
       <div className='flex items-center gap-x-3'>
-        <div className='flex items-center gap-x-2 cursor-pointer px-2 py-1 rounded-md hover:bg-slate-100'>
+        <div onClick={() => setHistory()} className='flex items-center gap-x-2 cursor-pointer px-2 py-1 rounded-md hover:bg-slate-100'>
           <p>History</p>
           <History size={23}/>
         </div>
@@ -26,14 +37,92 @@ const NavbarDetection:React.FC<{username:string|undefined}> = ({ username }) => 
 interface PopUpDetectionProps {
   img?: string;
   label: string;
+  percent: number;
   setPopup: () => void;
 }
 
-const PopUpDetection:React.FC<PopUpDetectionProps> = ({label, img, setPopup}) => {
+const PopUpDetection:React.FC<PopUpDetectionProps> = ({label, img, percent, setPopup}) => {
+  const printRef = useRef<HTMLDivElement>(null);
+
+  const generatePdf = async () => {
+    if (!printRef.current) return;
+
+    const canvas = await html2canvas(printRef.current);
+    const dataUrl = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("document.pdf");
+};
   return (
-    <div className='fixed bg-black bg-opacity-5 top-0 left-0 right-0 bottom-0 flex items-center justify-center'>
-      <div className='bg-white absolute w-full h-full md:w-[80%] md:h-[90%] lg:max-w-[1000px] rounded-lg'>
-        <ArrowLeft  className='absolute top-5 left-5 cursor-pointer hover:text-slate-400' onClick={() => setPopup()}/>
+    <div className='fixed z-50 bg-black bg-opacity-5 top-0 left-0 right-0 bottom-0 flex items-center justify-center'>
+      <div className='bg-white absolute w-full h-full md:w-[80%] md:top-[80px] lg:max-w-[800px] rounded-lg p-5'>
+        <div className='flex items-center justify-between text-slate-500'>
+          <ArrowLeft  className='cursor-pointer hover:text-slate-400' onClick={() => setPopup()}/>
+          <div onClick={generatePdf} className='flex items-center gap-x-2 cursor-pointer px-2 py-1 rounded-md border hover:bg-slate-100'>
+            <p>Print</p>
+            <Printer />
+          </div>
+        </div>
+
+        <div ref={printRef} className='p-2'>
+          <div className='mt-5 py-5 flex gap-5 items-center'>
+            <div className='w-[200px] h-[200px] rounded-lg bg-slate-200'>
+              <img src={img} alt="" />
+            </div>
+            <div className='p-3 rounded-lg bg-white w-[400px]'>
+              <h5 className='border-b'>Prediction</h5>
+              <div className='h-[90px]'>
+                <h6 className='font-medium py-5 text-xl'>{label?label:<p className='opacity-50'>Diagnosis</p>}</h6>
+                <div>
+                  <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                    <div className="bg-orange-600 text-xs font-medium text-orange-100 text-center p-0.5 leading-none rounded-full" style={{ width: percent+'%' }}>{percent&&`${percent}%`}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='p-3 border rounded-lg bg-white overflow-y-scroll max-h-[500px] output'>
+            {/* <ContentRenderer content={result} /> */}
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus 
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const PdfPrint:React.FC = () => {
+  return (
+    <div className='absolute left-0 right-0 top-0 bottom-0 bg-white p-10 pt-16'>
+      <div className='md:w-[700px] lg:w-[800px] mx-auto h-full border px-10'>
+        <div className='header py-5'>
+          <h1 className='text-xl font-bold text-center mt-12 text-aksen'>KNOW YOUR SIGHT</h1>
+          <p className='text-center text-sm mt-2'>Empowering Eye Health with AI Precision</p>
+        </div>
+        <hr />
+        <div>
+          <div className="text-sm w-[400px] grid grid-cols-3 gap-y-2 mt-10">
+            <p>Name</p>
+            <p className='col-span-2'>: Jimly Assidqi</p>
+            <p>Email</p>
+            <p className='col-span-2'>: jimlyasidqi@gmail.com</p>
+            <p>Date</p>
+            <p className='col-span-2'>: 2024/12/22</p>
+          </div>
+        </div>
+        <h5 className='mt-16 mb-2'>Report</h5>
+        <div className='border grid grid-cols-4 text-sm'>
+          <p className='border-b py-3 ps-2'>Diagnose</p>
+          <p className='col-span-3 border-b py-3 border-s px-2'>Cataract</p>
+          <p className='border-b py-3 ps-2'>Percent</p>
+          <p className='col-span-3 border-b py-3 border-s px-2'>94%</p>
+          <p className='border-b py-3 ps-2'>Recomendation</p>
+          <p className='col-span-3 border-b py-3 border-s px-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nostrum neque, voluptatem et facere non laboriosam, cum quos consequuntur odio quod earum esse.</p>
+        </div>
       </div>
     </div>
   )
@@ -56,6 +145,13 @@ const detection = async (image:Blob) => {
   return result.data
 }
 
+interface HistoryDetectionType {
+  img?: string;
+  label: string;
+  percent: number;
+  recommendation: string;
+}
+
 const Detection:React.FC = () => {
   const { user, getCookie } = useAuth();
   const [image, setImage] = useState<File | null>(null);
@@ -65,10 +161,26 @@ const Detection:React.FC = () => {
   const [confidience, setConfidience] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState<boolean>(false);
+  const [isHistory, setIsHistory] = useState<boolean>(false);
+  const [historyDetection, setHistoryDetection] = useState<HistoryDetectionType[]>([]);
 
   useEffect(()=>{
     getCookie()
   }, [])
+
+  // Disable body scroll when popup is open
+  useEffect(() => {
+    if (popUp) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    // Cleanup when component unmounts
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [popUp]);
 
   // Fungsi untuk menangani unggah gambar
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,6 +227,9 @@ const Detection:React.FC = () => {
         reader.readAsArrayBuffer(image);
       });
       const result= await detection(imageBlob) as string[]
+
+      let labelHistory = "";
+      let percentHistory = 0;
       if (typeof result[0] == 'object' && result[0] !== null) {
         const data: DetectionResult = result[0]
         const labelObject = result[0] as { label: string };
@@ -122,6 +237,8 @@ const Detection:React.FC = () => {
         const confidencePercent = Math.round(confidence * 100)
         setLabel(labelObject.label)
         setConfidience(confidencePercent)
+        labelHistory = labelObject.label;
+        percentHistory = confidencePercent;
       }
 
       const cleanedResult = result[1]
@@ -131,6 +248,11 @@ const Detection:React.FC = () => {
         .replace(/\(If Necessary\):/gi, '');
 
       setResult(cleanedResult)
+      // Set History
+      setHistoryDetection([
+        ...historyDetection,
+        { img: imageUrl || undefined, label: labelHistory || "No Label", percent: percentHistory, recommendation: cleanedResult }
+      ]);
     } catch (error) {
       console.error("Terjadi kesalahan:", error);
       setResult("Terjadi kesalahan saat mengirim data.");
@@ -150,9 +272,9 @@ const Detection:React.FC = () => {
   return (
     <div className='bg-secondary relative pt-16'>
       <div className='bg-white fixed top-0 right-0 left-0'>
-        <NavbarDetection username={user?.name}/>
+        <NavbarDetection username={user?.name} setHistory={()=>setIsHistory(!isHistory)}/>
       </div>
-      <div className='max-w-[1600px] mx-auto p-10 h-screen'>
+      <div className='max-w-[1600px] mx-auto md:p-10 h-screen'>
         <div className='grid md:grid-cols-2 gap-5'>
           <div>
             <div className='border p-3 rounded-lg bg-white min-h-[330px]'>
@@ -184,19 +306,27 @@ const Detection:React.FC = () => {
                 {isLoading? 'Detection...': 'Submit'}
               </button>
             </div>
-            <div className='border rounded-lg flex items-center gap-x-2 bg-white p-2 mt-10 '>
-              <div className='w-[100px] h-[100px] rounded-md bg-slate-200'></div>
-              <div className='w-[100px] h-[100px] rounded-md bg-slate-200'></div>
-              <div className='w-[100px] h-[100px] rounded-md bg-slate-200'></div>
-              <div className='w-[100px] h-[100px] rounded-md bg-slate-200'></div>
+            <div className=' mt-10 '>
+              <p className='text-sm mb-2'>Examples</p>
+              <div className='border rounded-lg flex items-center gap-x-2 bg-white p-2'>
+                <div className='w-[100px] h-[100px] rounded-md bg-slate-200 overflow-hidden'><img src={sample1} className='w-full h-full object-cover'/></div>
+                <div className='w-[100px] h-[100px] rounded-md bg-slate-200 overflow-hidden'><img src={sample2} className='w-full h-full object-cover'/></div>
+                <div className='w-[100px] h-[100px] rounded-md bg-slate-200 overflow-hidden'><img src={sample3} className='w-full h-full object-cover'/></div>
+                <div className='w-[100px] h-[100px] rounded-md bg-slate-200 overflow-hidden'><img src={sample4} className='w-full h-full object-cover'/></div>
+              </div>
             </div>
             <div className='mt-10'>
-              <h5 className='border-b pb-2 mb-5'>Recent detection</h5>
-              <div>
-                <div onClick={()=>setPopUp(prev => !prev)} className='flex items-center gap-x-3 p-2 border rounded-md cursor-pointer'>
-                  <div className='w-[50px] h-[50px] rounded-md bg-slate-200'></div>
-                  <p>{label&&label}</p>
-                </div>
+              <h5 className='border-b pb-2 mb-5 text-sm'>Recent detection</h5>
+              <div className='grid lg:grid-cols-2 items-center gap-3'>
+                {historyDetection.slice(-2).map((item, index) => (
+                  <div key={index} onClick={()=>setPopUp(prev => !prev)} className='flex items-center justify-between p-2 border rounded-md cursor-pointer mb-2'>
+                    <div className='flex items-center gap-x-3'>
+                      <div className='w-[50px] h-[50px] rounded bg-slate-200 overflow-hidden'><img src={item.img} alt="" /></div>
+                      <p>{item.label}</p>
+                    </div>
+                    <p>{item.percent}%</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -220,12 +350,30 @@ const Detection:React.FC = () => {
       </div>
 
       {/* Popup */}
-      {popUp && <PopUpDetection label='tes' setPopup={() => setPopUp(false)}/>}
+      {popUp && <PopUpDetection label='Catarac' percent={98} setPopup={() => setPopUp(false)}/>}
+      
 
       {/* Sidebar history */}
-      <div className='fixed top-16 right-0 w-[400px] bottom-0 bg-white bg-opacity-50 '>
-
+      <div className={`fixed top-[90px] ${isHistory? 'right-5' : 'right-[-400px]'} overflow-hidden transition-all w-[400px] bottom-16 bg-white border rounded-lg shadow-sm`}>
+          <div className='flex items-center justify-between p-3 border-b bg-slate-50'>
+            <h5>History</h5>
+            <ArrowRight onClick={()=>setIsHistory(false)} className=' text-slate-700 hover:text-slate-400 cursor-pointer'/>
+          </div>
+          <div className='p-3 mt-3'>
+            {historyDetection.map((item, index) => (
+              <div key={index} onClick={()=>setPopUp(prev => !prev)} className='flex items-center justify-between p-2 border rounded-md cursor-pointer mb-2'>
+                <div className='flex items-center gap-x-3'>
+                  <div className='w-[50px] h-[50px] rounded bg-slate-200 overflow-hidden'><img src={item.img} alt="" /></div>
+                  <p>{item.label}</p>
+                </div>
+                <p>{item.percent}%</p>
+              </div>
+            ))}
+          </div>
       </div>
+
+      {/* PDF PRINT */}
+      {/* <PdfPrint /> */}
     </div>
   )
 }
