@@ -311,11 +311,11 @@ const Detection:React.FC = () => {
               <h5>Prediction</h5>
               <div className='h-[90px]'>
                 <h6 className='font-medium text-center py-5 text-xl'>{label?label:<p className='opacity-50'>Diagnosis</p>}</h6>
-                {/* <div>
+                <div className='hidden'>
                   <div className="w-full bg-gray-200 rounded-full dark:bg-gray-700">
                     <div className="bg-aksen text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style={{ width: confidience+'%' }}>{confidience&&`${confidience}%`}</div>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
             <div className='p-3 border rounded-lg mt-3 bg-white min-h-[600px] max-h-[700px] overflow-y-scroll output'>
