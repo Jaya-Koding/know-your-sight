@@ -10,7 +10,6 @@ import sample1 from './../assets/images/sample1.png';
 import sample2 from './../assets/images/sample2.png';
 import sample3 from './../assets/images/sample3.png';
 import sample4 from './../assets/images/sample4.png';
-import icon from './../assets/images/icon.png';
 import logo from './../assets/images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 

@@ -6,7 +6,6 @@ import { useAuth } from '../../context/AuthContext'
 import { FaRegUser } from 'react-icons/fa'
 import { GrUpgrade } from 'react-icons/gr'
 import logo from './../../assets/images/logo.png'
-import icon from './../../assets/images/icon.png'
 
 const Navbar:React.FC = () => {
   const navigate = useNavigate()
