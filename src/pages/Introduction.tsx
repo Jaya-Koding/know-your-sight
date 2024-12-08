@@ -52,7 +52,7 @@ const Introduction:React.FC = () => {
             <div>
                 <h3 data-aos="fade-right" className='text-2xl lg:text-3xl font-bold text-aksen'>Preserve Your Eyes, Evey Vision Matters</h3>
                 <p className='text-slate-500 mt-5 mb-14 font-medium' data-aos="fade-right" data-aos-delay="200">Whether you’re a medical professional or an individual seeking answers, our accurate and accessible solution ensures every eye gets the attention it deserves</p>
-                <Button onClick={directToDetection} type='button'  dataAos={{type:"fade-right", delay:"200"}} className='flex gap-x-2 items-center'>Let's detection <ArrowRight size={20} className='mt-0.5'/></Button>
+                <Button onClick={directToDetection} type='button'  dataAos={{type:"fade-right", delay:"200"}} className='flex gap-x-2 items-center'>Let's detect <ArrowRight size={20} className='mt-0.5'/></Button>
             </div>
             
             <div className='hidden md:block gap-x-5 -mt-16 relative bg-aksen'>
