@@ -1,6 +1,6 @@
 # Know Your Sight
 
-Know Your Sight is an AI-powered web platform designed to make eye disease detection faster, smarter, and more accessible for everyone. Built with medical professionals and the general public in mind, the platform analyzes retinal images using a custom-trained EfficientNet B0 model to detect cataracts, glaucoma, diabetic retinopathy, or confirm normal eye conditions with 92% accuracy. Users can access the platform directly through a browser, without the need for specialized hardware.
+Know Your Sight is an AI-powered web platform designed to make eye disease detection faster, smarter, and more accessible for everyone. Built with medical professionals and the general public in mind, the platform analyzes retinal images using a custom-trained EfficientNet B0 model to detect cataracts, glaucoma, diabetic retinopathy, or confirm normal eye conditions with 92% accuracy. Users can access the platform directly through a browser with just a few clicks.
 
 ## Pages
 
